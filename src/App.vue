@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import { useCounterStore } from "./stores/counter";
+
+const counterStore = useCounterStore()
+
 </script>
 
 <template>
@@ -13,11 +17,16 @@ import HelloWorld from './components/HelloWorld.vue'
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/others/:param1">About</RouterLink>
       </nav>
     </div>
   </header>
-
   <RouterView />
+  <div>
+    <div>Pinia:</div>
+    <div>- counter.state.counter:{{ counterStore.value }}</div>
+    <div><button @click="()=>{counterStore.increment()}">+1</button></div>
+  </div>
 </template>
 
 <style scoped>
